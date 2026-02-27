@@ -1,0 +1,109 @@
+<!-- views/admin/dashboard.ejs -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .navbar-glass {
+      background: rgba(255, 255, 255, 0.8) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 115, 230, 0.1);
+    }
+    .main-content {
+      padding-top: 2rem;
+    }
+    .stat-card {
+      background: rgba(245,250,255,0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0,115,230,0.15);
+      border-radius: 1.5rem;
+      box-shadow: 0 15px 35px -10px rgba(0,115,230,0.2);
+      transition: all 0.3s;
+      height: 100%;
+    }
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 30px 45px -15px rgba(13,110,253,0.3);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg,#0073e6,#20c0b0);
+      border: none;
+    }
+    .section-title {
+      border-left: 4px solid #0073e6;
+      padding-left: 1rem;
+      margin: 2rem 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-glass">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-3 brand-name" href="/admin/dashboard">
+        <i class="bi bi-speedometer2 me-2 text-primary"></i>Auto Order Admin
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="adminNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="/admin/logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container main-content py-5">
+    <h1 class="main-title mb-4 mb-md-5">Dashboard</h1>
+    <div class="row mb-4 mb-md-5 g-3 g-md-4">
+      <div class="col-6 col-md-3"><div class="stat-card p-3 text-center"><div class="icon mb-2 fs-1 text-primary"><i class="bi bi-people"></i></div><h6 class="text-secondary">Pengunjung</h6><h2 class="fw-bold text-primary"><%= stats.visitors %></h2></div></div>
+      <div class="col-6 col-md-3"><div class="stat-card p-3 text-center"><div class="icon mb-2 fs-1 text-primary"><i class="bi bi-cart-check"></i></div><h6 class="text-secondary">Transaksi</h6><h2 class="fw-bold text-primary"><%= stats.transactions %></h2></div></div>
+      <div class="col-6 col-md-3"><div class="stat-card p-3 text-center"><div class="icon mb-2 fs-1 text-primary"><i class="bi bi-check-circle"></i></div><h6 class="text-secondary">Sukses</h6><h2 class="fw-bold text-primary"><%= stats.success %></h2></div></div>
+      <div class="col-6 col-md-3"><div class="stat-card p-3 text-center"><div class="icon mb-2 fs-1 text-primary"><i class="bi bi-x-circle"></i></div><h6 class="text-secondary">Gagal</h6><h2 class="fw-bold text-primary"><%= stats.failed %></h2></div></div>
+    </div>
+
+    <div class="card p-3 p-md-4">
+      <div class="card-body">
+        <h5 class="fw-bold mb-4 text-primary"><i class="bi bi-gear me-2"></i>Pengaturan</h5>
+        <form method="POST" action="/admin/update-settings">
+          <div class="section-title">Harga</div>
+          <div class="row g-3 mb-4">
+            <div class="col-sm-6 col-md-4"><label>Panel per GB (Rp)</label><input type="number" class="form-control" name="harga_panel_do_per_gb" value="<%= harga.panel_do_per_gb %>" required></div>
+            <div class="col-sm-6 col-md-4"><label>Panel UNLI (Rp)</label><input type="number" class="form-control" name="unli_do" value="<%= harga.unli_do %>" required></div>
+            <div class="col-sm-6 col-md-4"><label>Sewa Grup /bulan (Rp)</label><input type="number" class="form-control" name="group_price" value="<%= harga.group_price %>" required></div>
+          </div>
+          <div class="section-title">API Keys</div>
+          <div class="row g-3 mb-4">
+            <div class="col-md-6"><label>PaKasir API Key</label><input type="text" class="form-control" name="pakasir_api_key" value="<%= apiKey %>"><small class="text-muted">Kosongkan jika tidak ingin mengubah</small></div>
+          </div>
+          <div class="section-title">Pterodactyl (DO)</div>
+          <div class="row g-3 mb-4">
+            <div class="col-md-6"><label>Domain</label><input type="text" class="form-control" name="pterodactyl_domain" value="<%= pterodactylConfig.domain %>" required></div>
+            <div class="col-md-6"><label>API Key</label><input type="text" class="form-control" name="pterodactyl_api_key" value="<%= pterodactylConfig.api_key %>"><small class="text-muted">Kosongkan jika tidak ingin mengubah</small></div>
+            <div class="col-md-3"><label>Nest ID</label><input type="number" class="form-control" name="pterodactyl_nest_id" value="<%= pterodactylConfig.nest_id %>" required></div>
+            <div class="col-md-3"><label>Egg ID</label><input type="number" class="form-control" name="pterodactyl_egg_id" value="<%= pterodactylConfig.egg_id %>" required></div>
+            <div class="col-md-3"><label>Location ID</label><input type="number" class="form-control" name="pterodactyl_location_id" value="<%= pterodactylConfig.location_id %>" required></div>
+            <div class="col-md-6"><label>Docker Image</label><input type="text" class="form-control" name="pterodactyl_docker_image" value="<%= pterodactylConfig.docker_image %>" required></div>
+          </div>
+          <div class="section-title">Link Grup</div>
+          <div class="row g-3 mb-4">
+            <div class="col-md-6"><label>URL Grup</label><input type="text" class="form-control" name="group_link" value="<%= groupLink %>" required></div>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary px-4 py-2"><i class="bi bi-save me-2"></i>Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

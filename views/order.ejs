@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Order - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-3 brand-name" href="/plans">
+        <i class="bi bi-code-slash me-2 text-primary"></i>Auto Order
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/plans">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/plans">Plans</a></li>
+          <li class="nav-item"><a class="nav-link" href="/history">Riwayat</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://wa.me/<%= owner.wa %>">Kontak</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container py-5">
+    <h1 class="text-center main-title mb-5">Pilih Produk</h1>
+    <div class="row g-4 justify-content-center">
+      <!-- Panel -->
+      <div class="col-md-5">
+        <div class="card p-4 text-center shadow-hover h-100">
+          <i class="bi bi-cloud fs-1 mb-3"></i>
+          <h5 class="fw-bold">Panel DigitalOcean</h5>
+          <div class="server-specs my-3">
+            Harga mulai Rp <%= harga.panel_do_per_gb.toLocaleString('id-ID') %> per GB<br>Unlimited juga tersedia
+          </div>
+          <a href="/panel" class="btn btn-outline-primary rounded-pill mt-auto">Pilih Panel</a>
+        </div>
+      </div>
+      <!-- Sewa Grup -->
+      <div class="col-md-5">
+        <div class="card p-4 text-center shadow-hover h-100">
+          <i class="bi bi-people fs-1 mb-3"></i>
+          <h5 class="fw-bold">Sewa Grup</h5>
+          <div class="server-specs my-3">
+            Harga Rp <%= harga.group_price.toLocaleString('id-ID') %> / bulan<br>Akses grup eksklusif
+          </div>
+          <a href="/group" class="btn btn-outline-primary rounded-pill mt-auto">Beli Grup</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

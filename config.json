@@ -1,0 +1,34 @@
+{
+  "pakasir": {
+    "apiUrl": "https://app.pakasir.com",
+    "apiKey": "UdPyESRb3LlAF8j4LaIWU1Gk4kDlu4cb"
+  },
+  "port": 3000,
+  "slug": "auto-order",
+  "sessionSecret": "a9f7c3d8e2b1a4f6c8e0d3b5a7c9e1f2d4b6a8c0e2f4d6a8b0c2e4f6a8b0c2e4f6a8",
+  "admin": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "harga": {
+    "panel_do_per_gb": 2000,
+    "unli_do": 10000,
+    "group_price": 10000
+  },
+  "owner": {
+    "name": "Owner AutoOrder",
+    "wa": "628138045539"
+  },
+  "groupLink1": "https://chat.whatsapp.com/xxxxxx",
+  "groupLink2": "https://chat.whatsapp.com/yyyyyy",
+  "pterodactyl": {
+    "do": {
+      "domain": "https://panel.example.com",
+      "api_key": "ptla_xxxxxxxxxxxxxxxxxxxx",
+      "nest_id": 5,
+      "egg_id": 15,
+      "location_id": 1,
+      "docker_image": "ghcr.io/parkervcp/yolks:nodejs_22"
+    }
+  }
+}
